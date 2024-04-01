@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sinh Viên</title>
+    <style>
+        /* CSS styling */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Quản Lý Sinh Viên</h2>
+    
+    <form id="studentForm">
+        <label for="name">Tên:</label>
+        <input type="text" id="name" name="name">
+        <label for="age">Tuổi:</label>
+        <input type="number" id="age" name="age">
+        <label for="address">Địa chỉ:</label>
+        <input type="text" id="address" name="address" >
+        <label for="phone">Số điện thoại:</label>
+        <input type="tel" id="phone" name="phone">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <label for="class">Lớp học:</label>
+        <input type="text" id="class" name="class">
+        <button type="submit">Thêm mới</button>
+    </form>
+
+    <table id="studentTable">
+        <tr>
+            <th>STT</th>
+            <th>Tên</th>
+            <th>Tuổi</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th>Email</th>
+            <th>Lớp học</th>
+            <th>Thao tác</th>
+        </tr>
+    </table>
+
+    <script>
+        // JavaScript code
+        let students = []; // Mảng chứa thông tin sinh viên
+
+        const form = document.getElementById('studentForm');
+        const table = document.getElementById('studentTable');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const className = document.getElementById('class').value;
+
+            const student = {
+                name: name,
+                age: age,
+                address: address,
+                phone: phone,
+                email: email,
+                class: className
+            };
+
+            students.push(student);
+            displayStudents();
+            form.reset();
+        });
+
+        function displayStudents() {
+            table.innerHTML = `
+                <tr>
+                    <th>STT</th>
+                    <th>Tên</th>
+                    <th>Tuổi</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    <th>Lớp học</th>
+                    <th>Thao tác</th>
+                </tr>
+            `;
+
+            students.forEach((student, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${student.name}</td>
+                    <td>${student.age}</td>
+                    <td>${student.address}</td>
+                    <td>${student.phone}</td>
+                    <td>${student.email}</td>
+                    <td>${student.class}</td>
+                    <td><button onclick="editStudent(${index})">Sửa</button><button onclick="deleteStudent(${index})">Xóa</button></td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        function deleteStudent(index) {
+            students.splice(index, 1);
+            displayStudents();
+        }
+
+        function editStudent(index) {
+            const student = students[index];
+            document.getElementById('name').value = student.name;
+            document.getElementById('age').value = student.age;
+            document.getElementById('address').value = student.address;
+            document.getElementById('phone').value = student.phone;
+            document.getElementById('email').value = student.email;
+            document.getElementById('class').value = student.class;
+
+            // Remove the edited student from the array
+            students.splice(index, 1);
+            displayStudents();
+        }
+
+        displayStudents(); // Hiển thị sinh viên ban đầu
+    </script>
+</body>
+</html>
