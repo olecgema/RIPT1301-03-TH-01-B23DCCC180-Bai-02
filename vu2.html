@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="cu.css">
+</head>
+<body>
+    <div id="login">
+        <h1>Đăng Nhập</h1>
+        <form id="dnf">
+            
+            <input id="username" type="text" placeholder="  user">
+            <br>
+            <input id="password" type="password" placeholder="  password">
+            <button type="submit">Login</button>
+        </form>
+        <p id="error-message" class="error-message"></p>
+
+    </div>
+</body>
+</html>
+<script>
+document.getElementById("dnf").addEventListener("submit", function(event) {
+  event.preventDefault();
+  
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+  var errorMessage = document.getElementById("error-message");
+
+  if (username === "1" && password === "1") {
+    // Redirect to admin page
+    alert("dntc")
+    window.location.href = "quantri.html";
+  } else {
+    errorMessage.textContent = "Tài khoản hoặc mật khẩu không chính xác";
+  }
+});
+</script>
+

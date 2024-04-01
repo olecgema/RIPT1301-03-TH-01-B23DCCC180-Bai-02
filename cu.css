@@ -1,0 +1,27 @@
+#login {
+  height: 300px;
+  width: 300px;
+  border: 5px solid red;
+  border-radius: 20px;
+  text-align: center;
+  
+  
+}
+#login input{
+  position: relative;
+  height: 50px;
+  width: 200px;
+  border-radius: 10px;
+}
+#login button{
+  height: 50px;
+  width: 200px;
+  border-radius: 10px;
+
+  
+}
+#login button:active{
+
+  background-color: greenyellow;
+
+}
